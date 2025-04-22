@@ -1,0 +1,4 @@
+requests==2.31.0
+sqlparse
+pandas
+pyspark==3.5.5

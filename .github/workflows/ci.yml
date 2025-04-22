@@ -1,0 +1,89 @@
+# Uncomment to start the workflow to push the main branch
+# This is a Github Actions workflow file Automate sync the airflow DAGs from the main branch to VM
+# name: General CI-Remote update execution
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout code and setup SSH
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.SERVER_IP }}
+#         username: ${{ secrets.SERVER_USERNAME }}
+#         key: ${{ secrets.SERVER_KEY }}
+#         script: |
+#             cd /home/airflow/dags
+#             git config --global --add safe.directory /home/airflow/dags
+#             git checkout main
+#             git pull origin main --allow-unrelated-histories
+
+# name: Terraform CI-Remote update execution
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   terraform_apply:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           terraform_version: 1.0.0
+
+#       - name: Install the gcloud CLI
+#         uses: google-github-actions/setup-gcloud@v2
+#         with:
+#           project_id: ${{ secrets.GOOGLE_PROJECT }}
+#           service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+#           export_default_credentials: true
+#           version: '>= 363.0.0'
+    
+#       - name: Use gcloud CLI
+#         run: gcloud info
+
+#       - name: Authenticate with Google Cloud Platform
+#         uses: google-github-actions/auth@v2
+#         with:
+#           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      
+#       - name: Configure Terraform Backend
+#         run: |
+#           cat <<EOF >backend.tf
+#           terraform {
+#             backend "gcs" {
+#               # Add your GCS backend configuration here
+#               bucket  = "your-bucket-name"
+#               prefix  = "Terraform"
+#             }
+#           }
+#           EOF
+
+#       - name: Terraform Init
+#         run: terraform init
+      
+#       - name: Terraform Plan
+#         run: terraform plan -out=tfplan
+      
+#       - name: Terraform Apply
+#         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#         run: terraform apply -auto-approve tfplan
+      
+#       - name: Terraform Destroy
+#         run: terraform destroy -auto-approve
+#         env:
+#            credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      
