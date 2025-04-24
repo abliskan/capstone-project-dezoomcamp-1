@@ -1,0 +1,137 @@
+version: '3'
+
+x-airflow-common:
+  &airflow-common
+  build: .
+  environment:
+    &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: <use_var_on_env_file>
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: <use_var_on_env_file>
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN: <use_var_on_env_file>
+    AIRFLOW__CORE__FERNET_KEY: <use_var_on_env_file>
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: <use_var_on_env_file>
+    AIRFLOW__CORE__LOAD_EXAMPLES: <use_var_on_env_file>
+    AIRFLOW__API__AUTH_BACKENDS: <use_var_on_env_file>
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: <use_var_on_env_file>
+    GOOGLE_APPLICATION_CREDENTIALS: <use_var_on_env_file>
+    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: <use_var_on_env_file>
+    AIRFLOW_CONN_SPARK_DEFAULT: <use_var_on_env_file>
+  env_file:
+    - .env
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./credentials:/opt/airflow/credentials/
+    - ./scripts:/opt/airflow/scripts
+  depends_on:
+    &airflow-common-depends-on
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /sources/logs /sources/dags /sources/plugins
+        chown -R "${AIRFLOW_UID:-50000}:0" /sources/{logs,dags,plugins}
+        airflow connections add '<insert_sample_gcp_project_id>' \
+          --conn-type google_cloud_platform \
+          --conn-extra '{"extra__google_cloud_platform__keyfile_dict": "/opt/airflow/credentials/<insert_sample_credentials_key_base64>", "extra__google_cloud_platform__scope": "https://www.googleapis.com/auth/cloud-platform"}'
+        function ver() {
+          printf "%04d%04d%04d%04d" $${1//./ }
+        }
+        airflow_version=$$(PYTHONPATH=. python -c "import airflow; print(airflow.__version__)")
+        airflow db init
+        airflow users create \
+          --username <insert_airflow_username_or_use_var_on_env_file>\
+          --firstname <insert_airflow_firstname_or_use_var_on_env_file> \
+          --lastname <insert_airflow_lastname_or_use_var_on_env_file> \
+          --role <insert_airflow_admin_or_use_var_on_env_file> \
+          --email <insert_email_or_use_var_on_env_file> \
+          --password <insert_airflow_password_or_use_var_on_env_file>
+        exit 0
+    environment:
+      <<: *airflow-common-env
+    restart: on-failure
+
+  spark:
+    image: bitnami/spark:3.4.1
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/bitnami/spark/
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    volumes:
+      - ./credentials:/opt/airflow/credentials/
+      - ./jars:/opt/bitnami/spark/jars
+    
+  spark-worker:
+    image: bitnami/spark:3.4.1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/bitnami/spark/
+    volumes:
+      - ./credentials:/opt/airflow/credentials/
+      - ./jars:/opt/bitnami/spark/jars
+    depends_on:
+      - spark
+
+volumes:
+  postgres-db-volume:
