@@ -48,7 +48,7 @@ This project aims to build an end-to-end data engineering pipeline that ingests,
 - Data Visualization: Google Looker Studio
 
 ## 7. Setup guide
-** GCP **
+### GCP
 - Setup new project on google cloud platform:
   - Navigate to the new project.
   - Open the navigation menu and go to “IAM & Admin” > service accounts > create service account
@@ -60,22 +60,18 @@ This project aims to build an end-to-end data engineering pipeline that ingests,
 - Download service-account-keys (.json) to local computer
 - Move the (.json) file to the project path > credentials
 - Change the (.json) file to gcp_credentials.json
-<br>
-** Terraform **
+
+### Terraform
 Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/terraform)
-<br>
-** Airflow **
-- Data extraction on airflow
-  - task1: dag1-ingest-race-result.py <br>
-  extract raw race result data from Ergast API and load the data structured format (.csv) on GCS bucket 'gcp_project_id-formula-1-bucket' <br>
-  - task2: dag2-ingest-pitstop.py <br>
-  extract raw pistop data from Ergast API and load the data structured format (.csv) on GCS bucket 'gcp_project_id>-formula-1-bucket' <br>
-  - task3: dag3-ingest-driver-n-perform.py <br>
-  extract raw driver data and driver standing data from Ergast API and load the data structured format (.csv) on GCS bucket 'gcp_project_id>-formula-1-bucket' <br>
-  - task4: dag4-ingest-constructor-n-perform.py <br>
-  extract raw constructor data and constructor standing data from Ergast API and load the data structured format (.csv) on GCS bucket 'gcp_project_id>-formula-1-bucket' <br>
-  - task5: dag5-ingest-circuits.py <br>
-  extract raw circuits data from Ergast API and load the data structured format (.csv) on GCS bucket 'gcp_project_id>-formula-1-bucket' <br>
-  - task6: dag1-partition-race-result.py <br>
-  - task7: dag2-partition-race_schedule.py <br>
+
+### Airflow
+- Data extraction on airflow:
+  - task1: dag1-ingest-race-result.py
+  - task2: dag2-ingest-pitstop.py
+  - task3: dag3-ingest-driver-n-perform.py
+  - task4: dag4-ingest-constructor-n-perform.py
+  - task5: dag5-ingest-circuits.py
+  - task6: dag1-partition-race-result.py
+  - task7: dag2-partition-race_schedule.py
+
 Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/scripts)
