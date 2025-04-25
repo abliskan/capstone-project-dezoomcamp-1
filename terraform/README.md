@@ -29,5 +29,6 @@ terraform apply
 ```
 terraform destroy
 ```
-<br>
+
+## Architecture - terraform
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP%20VM.png)
