@@ -1,7 +1,7 @@
 # Using apache airflow and python for data ingestion 
 ## Installation and Setup
 > On phase-1, the pipeline will extract batch (@daily) from historical F1 data, convert it from unstructured format (.json) into a structured format (.csv), and store the (.csv) f1 data inside datalake (google cloud storage bucket).
-<br>
+
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/SS-Extract-all-Graph-airflow.PNG)
 
 1. Navigate to the project directory and activating virtual environment
