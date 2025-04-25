@@ -61,10 +61,10 @@ logout from airflow UI
 docker-compose -f airflow-docker-compose.yaml down
 ```
 <br>
-- The DAG orchestrates the python operator for scheduler
--> ./airflow/dags/: contains airflow DAG that manage ETL process
--> ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer
--> ./airflow/dags/f1-data-json/: json file from data source that save on local computer
+- The DAG orchestrates the python operator for scheduler: <br>
+	- ./airflow/dags/: contains airflow DAG that manage ETL process <br>
+	- ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer <br>
+	- ./airflow/dags/f1-data-json/: json file from data source that save on local computer
 
 ## GCS
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-F1-ALL-DATA-2020-2024-1.PNG)
