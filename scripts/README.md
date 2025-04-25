@@ -40,6 +40,8 @@ airflow connections add '<GCP_PROJECT_ID>' \
 
 - use this command to delete the connection
 ```
+airflow connections delete <name_conn_id>
+```
 
 5a. Access the airflow webserver(airflow UI)
 ```
@@ -49,7 +51,7 @@ open http://localhost:8080 on the browser
 5b. Type username and password that already been set on airflow-docker-compose.yaml or .env file <br>
 5c. Click the DAG name "dag1-ingest-race-result" on DAG waiting list to run the DAG <br>
 note: do the same for other dag-ingest-*.py <br>
-5d. After all success and finished <br>
+5d. After all success and finished
 ```
 logout from airflow UI
 ```
