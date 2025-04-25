@@ -1,5 +1,6 @@
 ## Setup Terraform for Automate GCP Services
-![Phase1-Automate]([https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/dezoomcamp-ricky-IaC/assets/GCP%20VM.png](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP%20VM.png))
+
+![Phase1-Automate](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/dezoomcamp-ricky-IaC/assets/GCP%20VM.png](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP%20VM.png)
 
 1. Install terraform on local machine
 2. Check the Terraform version:
