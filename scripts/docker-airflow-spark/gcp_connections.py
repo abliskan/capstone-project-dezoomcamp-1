@@ -8,7 +8,7 @@ def create_connections():
         conn_type='google_cloud_platform',
         extra={
             'project': os.environ.get('GCP_PROJECT_ID'),
-            'key_path': '/opt/airflow/credentials/kestra-demo-batch-pipeline-credentials.json'
+            'key_path': '/opt/airflow/credentials/<insert_sample_gcp_credentials_path>'
         }
     )
     
