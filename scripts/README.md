@@ -65,27 +65,25 @@ docker-compose -f airflow-docker-compose.yaml down
 >>> ./airflow/dags/: contains airflow DAG that manage ETL process <br>
 >>> ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer <br>
 >>> ./airflow/dags/f1-data-json/: json file from data source that save on local computer <br>
->>> ./airflow/dags/f1-data-parquet/: ./docker/ file from data source that save on local computer <br>
->>> ./credentials/<insert_sample_gcp_credentials_path>: <br>
->>> ./docker/docker-airflow/Dockerfile:  <br><br>
-
-<-> note: change this part with your personal GCP credential
+>>> ./credentials/<insert_sample_gcp_credentials_path>: GCP Keyfile Path
+>>> ./docker/docker-airflow: bundle up all the required files and dependencies
+>>> ./docker/docker-airflow/airflow-docker-compose.yaml:
+>>> ./scripts/docker-airflow/gcp_connections.py: Configure GCS connectivity <br><br>
+<-> note: <br>
+- change this part with your personal GCP credential, filename: Dockerfile
 ```
   (1) COPY credentials/<insert_sample_gcp_credentials_path> /opt/airflow/credentials/ 
   (2) COPY credentials/<insert_sample_credentials_key_base64_path> /opt/airflow/credentials/
   (3) ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/<insert_sample_gcp_credentials>
 ```
 
->>> ./docker/docker-airflow/airflow-docker-compose.yaml: <br><br>
-
-<-> note: <br>
-- load the data from .env file or just write the config on docker-compose-airlfow.yaml file
+- load the data from .env file or just write the config on the file, filename: airflow-docker-compose.yaml
 ```
 x-airflow-common:
 environment:
 ```
 
-- load the data from .env file or just write the config on docker-compose-airlfow.yaml file
+- load the data from .env file or just write the config on the file, filename: airflow-docker-compose.yaml
 ```
 airflow-init:
 command:
@@ -93,9 +91,7 @@ command:
 (2) airflow users create
 ```
 
->>> ./scripts/docker-airflow/gcp_connections.py: <br><br>
-
-note: change this part with your personal GCP credential 
+- change this part with your personal GCP credential 
 ```
 def create_connections():
 extra={
