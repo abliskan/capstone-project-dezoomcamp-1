@@ -1,0 +1,142 @@
+version: 2
+
+models:
+- name: dim_driver
+  description: >
+      "Driver dimension table with SCD Type-2 tracking for team changes"
+  columns:
+      - name: driver_sk
+        tests: [not_null]
+      - name: season
+      - name: driver_id
+        tests: [not_null]
+      - name: driver_name
+      - name: date_of_birth
+      - name: nationality
+
+- name: dim_constructors
+  description: >
+      "Constructor (team) dimension table with SCD Type-2 tracking for team name changes"
+  columns:
+      - name: constructor_sk
+        tests: [not_null]
+      - name: season
+      - name: constructor_id
+        tests: [not_null]
+      - name: constructor_name
+      - name: nationality
+
+- name: dim_pitstop
+  description: >
+      "Pitstop dimension table"
+  columns:
+      - name: pitstop_sk
+        tests: [not_null]
+      - name: season
+      - name: pitstop_id
+        tests: [not_null]
+      - name: round
+      - name: race_name
+      - name: date
+      - name: driver_id
+      - name: stop
+      - name: lap
+      - name: time
+      - name: duration
+
+- name: dim_race_result
+  description: >
+      "Race result dimension table"
+  columns:
+      - name: race_result_sk
+        tests: [not_null]
+      - name: driver_sk
+        description: "Foreign key to dim_drivers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_driver')
+              field: driver_sk
+      - name: constructor_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_constructors')
+              field: constructor_sk
+      - name: season
+      - name: race_resultid
+      - name: round
+      - name: race_name
+      - name: driver_id
+        tests: [not_null]
+      - name: driver_name
+      - name: constructor_id
+        tests: [not_null]
+      - name: constructor_name
+      - name: grid
+      - name: position
+      - name: points
+      - name: grid
+      - name: status
+      - name: laps
+      - name: fastest_rank
+      - name: fastest_lap
+      - name: fastest_time
+      - name: fastest_speed
+      - name: race_date
+      - name: year
+      - name: month
+      - name: date_of_birth
+      - name: nationality
+
+- name: fct_f1_race_data
+  description: >
+      "F1 race data fact table"
+  columns:
+      - name: race_result_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_race_result')
+              field: race_result_sk
+      - name: driver_sk
+        description: "Foreign key to dim_drivers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_race_result')
+              field: driver_sk
+      - name: constructor_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_race_result')
+              field: constructor_sk
+      - name: season
+      - name: round
+      - name: date
+      - name: race_name
+      - name: driver_id
+      - name: driver_name
+      - name: constructor_id
+      - name: constructor_name
+      - name: grid
+      - name: position
+      - name: points
+      - name: grid
+      - name: status
+      - name: laps
+      - name: fastest_rank
+      - name: fastest_lap
+      - name: fastest_time
+      - name: fastest_speed
+      - name: race_date
+      - name: date_of_birth
+      - name: nationality
+      - name: year
+      - name: month
+      - name: date_of_birth
+      - name: nationality
+      - name: stop
+      - name: time
+      - name: duration

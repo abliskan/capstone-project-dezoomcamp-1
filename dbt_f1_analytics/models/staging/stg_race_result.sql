@@ -1,0 +1,130 @@
+{{ 
+    config(
+        materialized='view'
+    )
+}}
+
+SELECT 
+    "2020" AS race_year,
+    raceResultId AS race_resultid,
+    CAST(driverId AS STRING) AS driver_id,
+    season,
+    raceName AS race_name,
+    date,
+    driverName AS driver_name,
+    CAST(constructorId AS STRING) AS constructor_id,
+    constructorName AS constructor_name,
+    grid,
+    position,
+    round,
+    points,
+    status,
+    laps,
+    fastest_rank,
+    fastest_lap,
+    fastest_time,
+    fastest_speed,
+    race_date,
+    year,
+    month
+FROM {{ source('<bigquery_dataset_id_main>', 'race_result_2020_ext') }}
+UNION ALL
+SELECT 
+    "2021" AS race_year,
+    raceResultId AS race_resultid,
+    CAST(driverId AS STRING) AS driver_id,
+    season,
+    raceName AS race_name,
+    date,
+    driverName AS driver_name,
+    CAST(constructorId AS STRING) AS constructor_id,
+    constructorName AS constructor_name,
+    grid,
+    position,
+    round,
+    points,
+    status,
+    laps,
+    fastest_rank,
+    fastest_lap,
+    fastest_time,
+    fastest_speed,
+    race_date,
+    year,
+    month
+FROM {{ source('<bigquery_dataset_id_main>', 'race_result_2021_ext') }}
+UNION ALL
+SELECT 
+    "2022" AS race_year,
+    raceResultId AS race_resultid,
+    CAST(driverId AS STRING) AS driver_id,
+    season,
+    raceName AS race_name,
+    date,
+    driverName AS driver_name,
+    CAST(constructorId AS STRING) AS constructor_id,
+    constructorName AS constructor_name,
+    grid,
+    position,
+    round,
+    points,
+    status,
+    laps,
+    fastest_rank,
+    fastest_lap,
+    fastest_time,
+    fastest_speed,
+    race_date,
+    year,
+    month
+FROM {{ source('<bigquery_dataset_id_main>', 'race_result_2022_ext') }}
+UNION ALL
+SELECT 
+    "2023" AS race_year,
+    raceResultId AS race_resultid,
+    CAST(driverId AS STRING) AS driver_id,
+    season,
+    raceName AS race_name,
+    date,
+    driverName AS driver_name,
+    CAST(constructorId AS STRING) AS constructor_id,
+    constructorName AS constructor_name,
+    grid,
+    position,
+    round,
+    points,
+    status,
+    laps,
+    fastest_rank,
+    fastest_lap,
+    fastest_time,
+    fastest_speed,
+    race_date,
+    year,
+    month
+FROM {{ source('<bigquery_dataset_id_main>', 'race_result_2023_ext') }}
+UNION ALL
+SELECT 
+    "2024" AS race_year,
+    raceResultId AS race_resultid,
+    CAST(driverId AS STRING) AS driver_id,
+    season,
+    raceName AS race_name,
+    date,
+    driverName AS driver_name,
+    CAST(constructorId AS STRING) AS constructor_id,
+    constructorName AS constructor_name,
+    grid,
+    position,
+    round,
+    points,
+    status,
+    laps,
+    fastest_rank,
+    fastest_lap,
+    fastest_time,
+    fastest_speed,
+    race_date,
+    year,
+    month
+FROM {{ source('<bigquery_dataset_id_main>', 'race_result_2024_ext') }}
