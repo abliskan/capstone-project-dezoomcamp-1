@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: fastest_pitstop
+    description: >
+      This model analyzes pit stop performance and race statistics by season, round, and constructor.
+      It calculates average pit stop times, grid-to-finish position changes, reliability percentages,
+      and other key race performance metrics.
+    columns:
+      - name: season
+        description: Formula 1 season year
+        tests: [not_null]
+      - name: round
+        description: Race round number within the season
+        tests: [not_null]
+      - name: race_name
+        description: Name of the Grand Prix
+      - name: constructor_name
+        description: Name of the constructor (team)
+        tests: [not_null]
+      - name: driver_count
+        description: Number of drivers racing for the team in this race
+      - name: avg_grid_position
+        description: Average starting grid position for the team
+      - name: avg_finish_position
+        description: Average finishing position for the team
+      - name: completed_races
+        description: Number of race entries that were completed (not retired/DNS/DSQ)
+      - name: total_races
+        description: Total number of race entries for the team (typically equals driver count)
+      - name: reliability_percentage
+        description: Percentage of race entries completed successfully
+      - name: avg_positions_gained
+        description: Average number of positions gained from grid to finish.
+      - name: avg_pit_time_seconds
+        description: Average pit stop duration in seconds
+      - name: fastest_pit_time_seconds
+        description: Fastest pit stop duration in seconds
+      - name: slowest_pit_time_seconds
+        description: Slowest pit stop duration in seconds
+      - name: pit_efficiency_rank
+        description: Ranking of teams by pit stop efficiency (lowest average pit time ranks first)
+      - name: race_performance_rank
+        description: Overall race performance ranking based on reliability percentage and positions gained.

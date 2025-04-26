@@ -1,0 +1,24 @@
+dbt_f1_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: <bigquery_project_id>
+      dataset: <bigquery_dataset_id_main>
+      threads: 1
+      keyfile: '../credentials/<insert_sample_gcp_credentials_path>'
+      location: EU
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      priority: interactive
+    prod:
+      type: bigquery
+      method: service-account
+      project: <bigquery_project_id>
+      dataset: <bigquery_dataset_id_dwh>
+      threads: 1
+      keyfile: '../credentials/<insert_sample_gcp_credentials_path>'
+      timeout_seconds: 300
+      location: EU
+      priority: interactive

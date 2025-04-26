@@ -1,0 +1,157 @@
+version: 2
+
+sources:
+  - name: <bigquery_dataset_id_main>
+    schema: <bigquery_dataset_id_main>
+
+    tables:
+      - name: race_result_2020_ext
+      - name: race_result_2021_ext
+      - name: race_result_2022_ext
+      - name: race_result_2023_ext
+      - name: race_result_2024_ext
+      - name: driver_2020_ext
+      - name: driver_2021_ext
+      - name: driver_2022_ext
+      - name: driver_2023_ext
+      - name: driver_2024_ext
+      - name: driver_performance_2020_ext
+      - name: driver_performance_2021_ext
+      - name: driver_performance_2022_ext
+      - name: driver_performance_2023_ext
+      - name: driver_performance_2024_ext
+      - name: constructors_2020_ext
+      - name: constructors_2021_ext
+      - name: constructors_2022_ext
+      - name: constructors_2023_ext
+      - name: constructors_2024_ext
+      - name: constructor_performance_2020_ext
+      - name: constructor_performance_2021_ext
+      - name: constructor_performance_2022_ext
+      - name: constructor_performance_2023_ext
+      - name: constructor_performance_2024_ext
+      - name: circuits_2020_ext
+      - name: circuits_2021_ext
+      - name: circuits_2022_ext
+      - name: circuits_2023_ext
+      - name: circuits_2024_ext
+      - name: pitstop_2020_ext
+      - name: pitstop_2021_ext
+      - name: pitstop_2022_ext
+      - name: pitstop_2023_ext
+      - name: pitstop_2024_ext
+
+models:
+- name: stg_race_result
+  description: >
+      The Formula 1 results for the specified race on 2020-2024.
+  columns:
+      - name: raceResultId
+        tests: [not_null]
+      - name: driverId
+        tests:
+          - not_null
+      - name: season
+      - name: round
+      - name: raceName
+      - name: driverName
+      - name: constructorId
+      - name: constructorName
+      - name: grid
+      - name: position
+      - name: points
+      - name: status
+      - name: laps
+      - name: fastest_rank
+      - name: fastest_lap
+      - name: fastest_time
+      - name: fastest_speed
+
+- name: stg_driver
+  description: >
+      The Formula 1 results for the specified drivers on 2020-2024.
+  columns:
+      - name: driverKeyId
+        tests: [not_null]
+      - name: season
+      - name: driverId
+        tests: [not_null]
+      - name: driverName
+      - name: dateOfBirth
+      - name: nationality
+
+- name: stg_driver_performance
+  description: >
+      The Formula 1 results for the specified driver performance on 2020-2024.
+  columns:
+      - name: driverPerfKeyId
+        tests: [not_null]
+      - name: season
+      - name: driverId
+        tests: [not_null]
+      - name: driverName
+      - name: constructorId
+      - name: constructorName
+      - name: position
+      - name: points
+      - name: wins
+
+- name: stg_constructors
+  description: >
+      The Formula 1 results for the specified constructors on 2020-2024.
+  columns:
+      - name: constructorKeyId
+        tests: [not_null]
+      - name: season
+      - name: constructorId
+        tests: [not_null]
+      - name: constructorName
+      - name: nationality
+
+- name: stg_contructor_performance
+  description: >
+      The Formula 1 results for the specified contructor performance on 2020-2024.
+  columns:
+      - name: constructorPerfKeyId
+        tests: [not_null]
+      - name: season
+      - name: constructorId
+        tests: [not_null]
+      - name: constructorName
+      - name: position
+      - name: points
+      - name: wins
+      - name: nationality
+      - name: url
+
+- name: stg_circuits
+  description: >
+      The Formula 1 results for the specified circuits on 2020-2024.
+  columns:
+      - name: circuitKeyId
+        tests: [not_null]
+      - name: season
+      - name: circuitId
+        tests: [not_null]
+      - name: circuitName
+      - name: country
+      - name: locality
+      - name: lat
+      - name: long
+
+- name: stg_pitstop
+  description: >
+      The Formula 1 results for the specified pitstop on 2020-2024.
+  columns:
+      - name: pitstopId
+        tests: [not_null]
+      - name: season
+      - name: round
+      - name: raceName
+      - name: date
+      - name: driverId
+        tests: [not_null]
+      - name: stop
+      - name: lap
+      - name: time
+      - name: duration

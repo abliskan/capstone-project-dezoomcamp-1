@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: mrt_top_driver_standing
+    description: >
+      Show top driver performance based on year and season calculate by total points (ggregated).
+      It calculates total races, points, wins, podium finishes, and various
+      performance ratios to identify the best drivers per season.
+    columns:
+      - name: season
+        description: Formula 1 season year
+      - name: driver_id
+        description: Unique identifier for the driver
+        tests: [not_null]
+      - name: driver_name
+        description: Full name of the driver
+      - name: total_races
+        description: Total number of races participated in by the driver during the season
+      - name: total_points
+        description: Sum of all points earned by the driver during the season
+      - name: wins
+        description: Number of races won (position 1) by the driver during the season
+      - name: second_places
+        description: Number of races finished in position 2 by the driver during the season
+      - name: third_places
+        description: Number of races finished in position 3 by the driver during the season
+      - name: podium_finishes
+        description: Total number of podium finishes (positions 1-3) by the driver during the season
+      - name: win_percentage
+        description: Percentage of races won out of total races participated
+      - name: podium_percentage
+        description: Percentage of races with podium finishes out of total races participated
+      - name: avg_points_per_race
+        description: Average points earned per race during the season
+      - name: win_rank
+        description: Driver ranking within the season based on wins, then podiums, then points
+      - name: points_rank
+        description: Driver ranking within the season based on total points
+  
+  - name: mrt_top_constructor_standing
+    description: >
+      Show top constructor (team) performance based on year and season calculate by position (ggregated).  
+      It calculates total entries, points, wins, podium finishes, and various
+      performance ratios to identify the best constructors per season.
+    columns:
+      - name: season
+        description: Formula 1 season year
+      - name: constructor_id
+        description: Unique identifier for the constructor (team)
+        tests: [not_null]
+      - name: constructor_name
+        description: Name of the constructor (team)
+      - name: total_entries
+        description: Total number of race entries by the constructor during the season (car-race combinations)
+      - name: total_points
+        description: Sum of all points earned by the constructor during the season
+      - name: wins
+        description: Number of races won (position 1) by the constructor during the season
+      - name: win_percentage
+        description: Percentage of races won out of total entries
+      - name: avg_points_per_entry
+        description: Average points earned per race entry during the season
+      - name: points_rank
+        description: Constructor ranking within the season based on total points
