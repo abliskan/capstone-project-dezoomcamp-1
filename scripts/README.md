@@ -61,13 +61,12 @@ logout from airflow UI
 docker-compose -f airflow-docker-compose.yaml down
 ```
 <br>
-- Project structure explanation to run airflow orchestrator <br>
+<-> Project structure explanation to run airflow orchestrator <br>
 >>> ./airflow/dags/: contains airflow DAG that manage ETL process <br>
 >>> ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer <br>
 >>> ./airflow/dags/f1-data-json/: json file from data source that save on local computer <br>
 >>> ./credentials/<insert_sample_gcp_credentials_path>: GCP Keyfile Path <br>
 >>> ./docker/docker-airflow: bundle up all the required files and dependencies <br>
->>> ./docker/docker-airflow/airflow-docker-compose.yaml <br>
 >>> ./scripts/docker-airflow/gcp_connections.py: Configure GCS connectivity <br><br>
 <-> note: <br>
 
@@ -102,9 +101,11 @@ extra={
 
 ## GCS (target1)
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-F1-ALL-DATA-2020-2024-1.PNG)
-
+ 
+<br><br><br>
+ 
 # Using apache spark and python/pandas for partition data
-Installation and setup
+## Installation and setup
 > On phase-2, the pipeline will convert (.csv) from previous cloud storage bucket to new new cloud storage bucket in parquet format.
 
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-GCS-RACE-RESULT-SUCCESS-2-airflow.PNG)
@@ -117,12 +118,12 @@ conda activate <virtual_env_name>
 
 2. Pull the docker image
 ```
-docker-compose -f airflow-docker-compose.yaml build
+docker-compose -f docker-compose-airflow.yaml build
 ```
 
 3. Starts the containers
 ```
-docker-compose -f airflow-docker-compose.yaml up
+docker-compose -f docker-compose-airflow.yaml up
 ```
 
 4. Get inside the airflow container
@@ -163,15 +164,14 @@ logout from airflow UI
 
 6. Stop and remove the the airflow container
 ```
-docker-compose -f airflow-docker-compose.yaml down
+docker-compose -f docker-compose-airflow.yaml down
 ```
 <br>
-- Project structure explanation to run airflow orchestrator <br>
+<-> Project structure explanation to run airflow orchestrator <br>
 >>> ./airflow/dags/: contains airflow DAG that manage ETL process <br>
 >>> ./airflow/dags/f1-data-parquet/: .pargquet file from data source that save on local computer <br>
 >>> ./credentials/<insert_sample_gcp_credentials_path>: GCP Keyfile Path <br>
 >>> ./docker/docker-airflow: bundle up all the required files and dependencies <br>
->>> ./docker/docker-airflow/airflow-docker-compose.yaml <br>
 >>> ./scripts/docker-airflow/gcp_connections.py: Configure GCS connectivity <br><br>
 <-> note: <br>
 
@@ -182,13 +182,13 @@ docker-compose -f airflow-docker-compose.yaml down
   (3) ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/<insert_sample_gcp_credentials>
 ```
 
-- load the data from .env file or just write the config on the file, filename: airflow-docker-compose.yaml
+- load the data from .env file or just write the config on the file, filename: docker-compose-airflow.yaml
 ```
 x-airflow-common:
 environment:
 ```
 
-- load the data from .env file or just write the config on the file, filename: airflow-docker-compose.yaml
+- load the data from .env file or just write the config on the file, filename: docker-compose-airflow.yaml
 ```
 airflow-init:
 command:
