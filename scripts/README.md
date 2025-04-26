@@ -107,7 +107,7 @@ extra={
 Installation and setup
 > On phase-2, the pipeline will convert (.csv) from previous cloud storage bucket to new new cloud storage bucket in parquet format.
 
-![alt text](<insert_partition_dag_graph_image>)
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-GCS-RACE-RESULT-SUCCESS-2-airflow.PNG)
 
 1. Navigate to the project directory and activating virtual environment
 ```
@@ -166,7 +166,7 @@ logout from airflow UI
 docker-compose -f airflow-docker-compose.yaml down
 ```
 <br>
-- Project structure explanation to run airflow orchestrator
+- Project structure explanation to run airflow orchestrator <br>
 >>> ./airflow/dags/: contains airflow DAG that manage ETL process <br>
 >>> ./airflow/dags/f1-data-parquet/: .pargquet file from data source that save on local computer <br>
 >>> ./credentials/<insert_sample_gcp_credentials_path>: GCP Keyfile Path <br>
@@ -203,3 +203,6 @@ extra={
 'project': os.environ.get('GCP_PROJECT_ID'),
             'key_path': '/opt/airflow/credentials/<insert_sample_gcp_credentials_path>'}
 ```
+
+## GCS (target2)
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-GCS-RACE-RESULT-SUCCESS-1.PNG)
