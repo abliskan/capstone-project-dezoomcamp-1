@@ -61,10 +61,47 @@ logout from airflow UI
 docker-compose -f airflow-docker-compose.yaml down
 ```
 <br>
-- The DAG orchestrates the python operator for scheduler: <br>
-	- ./airflow/dags/: contains airflow DAG that manage ETL process <br>
-	- ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer <br>
-	- ./airflow/dags/f1-data-json/: json file from data source that save on local computer
+- Project structure explanation to run airflow orchestrator <br>
+>>> ./airflow/dags/: contains airflow DAG that manage ETL process <br>
+>>> ./airflow/dags/f1-data-csv/: csv file from data source that save on local computer <br>
+>>> ./airflow/dags/f1-data-json/: json file from data source that save on local computer <br>
+>>> ./airflow/dags/f1-data-parquet/: ./docker/ file from data source that save on local computer <br>
+>>> ./credentials/<insert_sample_gcp_credentials_path>: <br>
+>>> ./docker/docker-airflow/Dockerfile:  <br><br>
+
+<-> note: change this part with your personal GCP credential
+```
+  (1) COPY credentials/<insert_sample_gcp_credentials_path> /opt/airflow/credentials/ 
+  (2) COPY credentials/<insert_sample_credentials_key_base64_path> /opt/airflow/credentials/
+  (3) ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/<insert_sample_gcp_credentials>
+```
+
+>>> ./docker/docker-airflow/airflow-docker-compose.yaml: <br><br>
+
+<-> note: <br>
+- load the data from .env file or just write the config on docker-compose-airlfow.yaml file
+```
+x-airflow-common:
+environment:
+```
+
+- load the data from .env file or just write the config on docker-compose-airlfow.yaml file
+```
+airflow-init:
+command:
+(1) airflow connections add
+(2) airflow users create
+```
+
+>>> ./scripts/docker-airflow/gcp_connections.py: <br><br>
+
+note: change this part with your personal GCP credential 
+```
+def create_connections():
+extra={
+'project': os.environ.get('GCP_PROJECT_ID'),
+            'key_path': '/opt/airflow/credentials/<insert_sample_gcp_credentials_path>'}
+```
 
 ## GCS
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-F1-ALL-DATA-2020-2024-1.PNG)
