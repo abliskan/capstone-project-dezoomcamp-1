@@ -86,4 +86,31 @@
 #         run: terraform destroy -auto-approve
 #         env:
 #            credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      
+
+# jobs:
+#   dbt_test:
+#     name: Run dbt Tests
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.11'
+#       - name: Install dbt
+#         run: pip install dbt-core dbt-bigquery
+#       - name: Execute dbt Tests
+#         run: dbt test
+#         env:
+#           DBT_PROFILES_DIR: .
+#           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+#   dbt_slim_ci:
+#     steps:
+#       - checkout      
+#       - run: dbt deps  # Install dependencies
+#       - run: |
+#           OUTPUT=$(dbt ls --selector state:modified+ --defer --state=prod-run-artifacts)  # Get a list of modified dbt models
+#           if [[ -n "$OUTPUT" ]]; then
+#             dbt run --models "$OUTPUT"  # Run dbt only on modified models
+#           else
+#             echo "No modified models found. Skipping dbt run."
+#           fi
