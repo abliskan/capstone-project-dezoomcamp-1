@@ -129,12 +129,13 @@ OPTIONS (
 ```
 <br>
 - Staging table inside Bigquery
+
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
-<br>
 - Dim and fact table inside Bigquery
+
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
-<br>
 - Mart table
+
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-mart-table.png)
 
 ### DBT
