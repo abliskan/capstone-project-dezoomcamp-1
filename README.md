@@ -58,6 +58,8 @@ This project aims to build an end-to-end data engineering pipeline that ingests,
 Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/terraform)
 
 ### Airflow
+Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/scripts)
+<br>
 - Data extraction on airflow:
   - task1: dag1-ingest-race-result.py
   - task2: dag2-ingest-pitstop.py
@@ -68,12 +70,10 @@ Check the detail on this [Link](https://github.com/abliskan/capstone-project-dez
 - Data convert from .csv format into .parquet format
   - task1: dag1-partition-race-result.py
   - task2: dag2-partition-race_schedule.py
-<br>
-Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/scripts)
 
 ### Bigquery
 > On phase-3, all the table inside bigquery dataset (data warehouse & data mart) are relies on an external table from the result of partitioned data using SQL Bigquery.
-
+<br>
 >>> External Table
 Sample SQL bigquery code
 ```
@@ -127,15 +127,12 @@ OPTIONS (
 );
 ```
 <br>
-- Partition data inside GCS
-![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/GCP-GCS-RACE-RESULT-SUCCESS-1.PNG)
-
 - Staging table inside Bigquery
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
-
+<br>
 - Dim and fact table inside Bigquery
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
-
+<br>
 - Mart table
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-mart-table.png)
 
@@ -144,7 +141,7 @@ There are 3 different transformation layer in this process:
 - [`Staging`](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics/models/staging) - read table from bigquery external table, transform the data, and create the result into view stg_* (stg_pitstop, stg_race_result, stg_drivers, stg_driver_performance, stg_constructors, stg_constructors_performance, stg_circuits), example image (stg-driver)
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/dbt-dag-stg-driver.PNG)
 
-- [`Data warehouse`](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics/models/mart/core) - read table from stg_* table, modeling data into data warehouse, and create the result into dim_* table (dim_pitstop, dim_driver, dim_constuctor, dim_race_result), example image ()
+- [`Data warehouse`](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics/models/mart/core) - read table from stg_* table, modeling data into data warehouse, and create the result into dim_* table (dim_pitstop, dim_driver, dim_constuctor, dim_race_result)
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/dbt-dag-dim-fact-dwh.png)
 
 - [`Data mart`](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics/models/mart/driver) - (example = driver) read table from dim/fact table, aggregate using sql, and create the result
