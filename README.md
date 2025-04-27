@@ -74,52 +74,53 @@ Check the detail on this [Link](https://github.com/abliskan/capstone-project-dez
 ### Bigquery
 > On phase-3, all the table inside bigquery dataset (data warehouse & data mart) are relies on an external table from the result of partitioned data using SQL Bigquery.
 <br>
->>> External Table
+>>> External Table <br>
 Sample SQL bigquery code
+
 ```
--- 2020 | race_result
+# 2020 | race_result
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.race_result_2020_ext`
 OPTIONS (
   format = 'PARQUET',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/parquet/2020/race_result_*.parquet']
 );
 
--- 2020 | driver
+# 2020 | driver
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.driver_2020_ext`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/driver_2020.csv']
 );
 
--- 2020 | constructors
+# 2020 | constructors
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.constructors_2020_ext`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/constructors_2020.csv']
 );
 
--- 2020 | Circuits
+# 2020 | Circuits
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.circuits_2020_ext`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/circuits_2020.csv']
 );
 
--- 2020 | Driver Performance
+# 2020 | Driver Performance
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.driver_performance_2020_ext`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/driver_performance_2020.csv']
 );
 
--- 2020 | Constructor Performance
+# 2020 | Constructor Performance
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.constructor_performance_2020_ext`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://<gcp_project_id>-<bucket_name>/f1_data/constructor_perform_2020.csv']
 );
 
--- 2020 | Pitstop
+# 2020 | Pitstop
 CREATE OR REPLACE EXTERNAL TABLE `<bigquery_project_id>.<bigquery-dataset>.pitstop_2020_ext`
 OPTIONS (
   format = 'CSV',
