@@ -22,7 +22,7 @@ This project aims to build an end-to-end data engineering pipeline that ingests,
  
 ## 5. Data source
 - See the [Dataset link](https://ergast.com/mrd/)
-<br>
+
 - There are 7 core files of 26 in total dataset:
  	- driver profile
  	- driver standing
@@ -31,6 +31,7 @@ This project aims to build an end-to-end data engineering pipeline that ingests,
  	- circuit information
  	- race result 
  	- pitstop
+
 - The data is collected since season 2020 until season 2024
  
 ## 6. Tools use
