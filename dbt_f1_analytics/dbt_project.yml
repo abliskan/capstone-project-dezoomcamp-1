@@ -50,4 +50,4 @@ models:
       
       pitstop:
         +materialized: table
-        +tags: ["driver"]
+        +tags: ["pitstop"]
