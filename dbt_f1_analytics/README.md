@@ -46,6 +46,7 @@ dbt docs serve
 ```
 <br>
 ERD for data warehouse data modeling
+
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/DWH-Schema-Design-v1.png)
 
 ## Resources:
