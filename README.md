@@ -151,3 +151,13 @@ There are 3 different transformation layer in this process:
 Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics)
 
 ### Looker Studio
+You can vew the dashboard here:
+- Section 1: Driver Performance
+
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/BI-Dashboard-Page-1.PNG)
+- Section 2: Constructor/team Analysis
+
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/BI-Dashboard-Page-2.PNG)
+- Section 3: Pit Stop Metrics
+
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/BI-Dashboard-Page-3.PNG)
