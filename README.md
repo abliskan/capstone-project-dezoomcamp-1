@@ -18,7 +18,7 @@ Formula 1 Racing Team Alpha seeks to establish a comprehensive data pipeline to 
 This project aims to build an end-to-end data engineering pipeline that ingests, processes, and analyzes Formula 1 racing data. The data coming from open source on API that handle historical record of race, driver, circuits, and many more data related to Formula 1. The pipeline will extract historical F1 data, transform it into a structured format, and store it in a cloud-based data warehouse. The data will be used for performance analytics, race predictions, and interactive visualizations.
  
 ## 4. Architecture
-![System architecture](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/Final-project-dataflow-v1.png)
+![System architecture](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/Final-project-dataflow-v1-1.png)
  
 ## 5. Data source
 - See the [Dataset link](https://ergast.com/mrd/)
@@ -129,13 +129,17 @@ OPTIONS (
 );
 ```
 <br>
+
+- External table inside Bigquery
+
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-external-table-sample.png)
 - Staging table inside Bigquery
 
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
 - Dim and fact table inside Bigquery
 
-![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-partition-view-sample.png)
-- Mart table
+![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-dim-fact-table.png)
+- Mart table inside Bigquery
 
 ![alt text](https://github.com/abliskan/capstone-project-dezoomcamp-1/blob/main/assets/bigquery-mart-table.png)
 
@@ -152,6 +156,8 @@ There are 3 different transformation layer in this process:
 Check the detail on this [Link](https://github.com/abliskan/capstone-project-dezoomcamp-1/tree/main/dbt_f1_analytics)
 
 ### Looker Studio
+> On phase-5, the f1 data inside data mart will be load into google looker studio for interactive visualizations.
+<br>
 You can vew the dashboard here:
 - Section 1: Driver Performance
 
